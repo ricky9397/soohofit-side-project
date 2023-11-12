@@ -15,7 +15,6 @@ public class MainController {
 
     @GetMapping("/")
     public String about() throws Exception {
-        logger.info("dubug");
         return "about";
     }
 
