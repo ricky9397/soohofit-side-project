@@ -85,7 +85,7 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li>
+                        <li class="active-menu">
                             <a href="/">About</a>
                         </li>
                         <li>
