@@ -11,4 +11,9 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
 
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://144.24.87.137:35432/soohofit?serverTimezone=Asia/Seoul
+    username: soohofit
+    password: soohofit1
 

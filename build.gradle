@@ -30,7 +30,8 @@ dependencies {
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
     /* jsp 수정 후 바로 반영 */
     implementation 'org.springframework.boot:spring-boot-devtools'
-
+    /* Postgres SQL JDBC Driver » 42.6.0 */
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
 
     /* Spring Security */
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
