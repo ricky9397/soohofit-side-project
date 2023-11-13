@@ -1,6 +1,7 @@
 server:
   port: 8080
   servlet:
+    context-path: /
     jsp:
       init-parameters:
         development=true:
@@ -17,3 +18,10 @@ spring:
     username: soohofit
     password: soohofit1
 
+  jpa:
+    hibernate:
+      ddl-auto: create #create update none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    generate-ddl: true

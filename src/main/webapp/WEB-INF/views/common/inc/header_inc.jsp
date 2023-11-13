@@ -40,7 +40,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css"/>
     <!--===============================================================================================-->
 
-
     <script src="/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 
 
@@ -61,8 +60,8 @@
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        Help & FAQs
+                    <a href="/user/loginForm.do" class="flex-c-m trans-04 p-lr-25">
+                        로그인
                     </a>
 
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
