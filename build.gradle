@@ -15,6 +15,10 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2022.0.4")
+}
+
 dependencies {
     /* spring */
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -30,12 +34,24 @@ dependencies {
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
     /* jsp 수정 후 바로 반영 */
     implementation 'org.springframework.boot:spring-boot-devtools'
+    /* Postgres SQL JDBC Driver » 42.6.0 */
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
 
+
+    implementation 'org.springframework.cloud:spring-cloud-config-server' //구성 서버
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap' //부트스트랩
+    implementation 'org.springframework.cloud:spring-cloud-starter-vault-config' //볼트
 
     /* Spring Security */
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
 
 
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 tasks.named('bootBuildImage') {
