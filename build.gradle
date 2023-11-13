@@ -37,11 +37,6 @@ dependencies {
     /* Postgres SQL JDBC Driver » 42.6.0 */
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
 
-
-    implementation 'org.springframework.cloud:spring-cloud-config-server' //구성 서버
-    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap' //부트스트랩
-    implementation 'org.springframework.cloud:spring-cloud-starter-vault-config' //볼트
-
     /* Spring Security */
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
 
