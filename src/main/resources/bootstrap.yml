@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: spring_properties
+  cloud:
+    vault:
+      token: ${vault.token}
+      scheme: http
+      uri: http://144.24.87.137:8200
+      authentication: token
+      kv:
+        enabled: true
