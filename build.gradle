@@ -46,6 +46,12 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
 
+    // logstash
+    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '7.4'
+
+    // log4h2
+    implementation group: 'org.codehaus.janino', name: 'janino', version: '3.1.10'
+
     /* Spring Security */
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
 
