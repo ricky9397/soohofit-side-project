@@ -1,4 +1,4 @@
-package com.project.soohofit.common;
+package com.project.soohofit.common.jpa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
