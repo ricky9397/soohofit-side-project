@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/user")
 public class UserLoginController {
 
-    @GetMapping("/login/loginForm.do")
+    @GetMapping("/login/loginForm")
     public String loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
         return "user/login/loginForm";
     }
 

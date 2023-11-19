@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
-                    <a href="/user/loginForm.do" class="flex-c-m trans-04 p-lr-25">
+                    <a href="/user/login/loginForm" class="flex-c-m trans-04 p-lr-25">
                         로그인
                     </a>
 
