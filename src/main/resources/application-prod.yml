@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8082
   servlet:
     context-path: /
     jsp:
@@ -37,5 +37,5 @@ spring:
 logging:
   level:
     org.hibernate:
-      type.descriptor: trace
-      sql: debug
+        type.descriptor: trace
+        sql: debug

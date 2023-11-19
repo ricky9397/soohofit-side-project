@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 60초마다 설정 파일의 변경을 확인 하여 변경시 갱신 -->
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %blue(%-5level) %logger{35} %red(%logger{15}) - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 파일 업로드 경로 설정 -->
+    <property name="log_dir" value="/var/log/tomcat/soohofit/logs" />
+
+    <if condition='property("os.name").contains("Windows")'>
+        <then>
+            <property name="log_dir" value="C:\soohofit\logs\" />
+        </then>
+    </if>
+    <if condition='property("os.name").contains("Mac")'>
+        <then>
+            <property name="log_dir" value="/Users/su/Dev/logs" />
+        </then>
+    </if>
+
+    <appender name="DAILY_ROLLING_FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_dir}/log.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level%logger{35} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}/log_%d{yyyy-MM-dd-HH}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>5MB</maxFileSize>
+                <!-- kb, mb, gb -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+<!--    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        <destination>localhost:5100</destination>-->
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+    <root level="info">
+        <appender-ref ref="console" />
+<!--        <appender-ref ref="logstash"/>-->
+        <appender-ref ref="DAILY_ROLLING_FILE_APPENDER"/>
+    </root>
+
+    <logger name="org.hibernate.sql" additivity="false">
+        <level value = "info" />
+        <appender-ref ref="console" />
+        <appender-ref ref="DAILY_ROLLING_FILE_APPENDER" />
+    </logger>
+
+    <logger name="org.springframework.web.servlet.DispatcherServlet" additivity="false">
+        <level value = "debug" />
+<!--        <appender-ref ref="logstash"/>-->
+        <appender-ref ref="console" />
+        <appender-ref ref="DAILY_ROLLING_FILE_APPENDER" />
+    </logger>
+
+</configuration>
