@@ -46,7 +46,7 @@
 <!--        </encoder>-->
 <!--    </appender>-->
 
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="console" />
 <!--        <appender-ref ref="logstash"/>-->
         <appender-ref ref="DAILY_ROLLING_FILE_APPENDER"/>

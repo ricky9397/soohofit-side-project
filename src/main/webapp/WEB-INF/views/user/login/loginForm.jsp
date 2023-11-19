@@ -16,7 +16,7 @@
             <div class="input-form-box"><span>비밀번호 </span><input type="password" name="upw" class="form-control"></div>
             <div>
 
-                <a href="<c:url value="/user/join/joinForm.do"/>"><span>회원가입 /</span></a>
+                <a href="<c:url value="/user/join/joinForm"/>"><span>회원가입 /</span></a>
                 <a href="javascrit:(0)"><span>아이디찾기 /</span></a>
                 <a href="javascrit:(0)"><span>비밀번호찾기 </span></a>
             </div>
