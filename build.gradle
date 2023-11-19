@@ -53,7 +53,10 @@ dependencies {
     implementation group: 'org.codehaus.janino', name: 'janino', version: '3.1.10'
 
     /* Spring Security */
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    /* oauth2 */
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
 
 
 }

@@ -20,14 +20,11 @@
             <div class="input-form-box"><span>성별</span><input type="password" name="upw" class="form-control"></div>
             <div class="input-form-box"><span>이메일</span><input type="password" name="upw" class="form-control"></div>
             <div class="input-form-box"><span>주소</span><input type="password" name="upw" class="form-control"></div>
-            <div>
-
-                <a href="<c:url value="/user/join/joinForm.do"/>"><span>회원가입 /</span></a>
-                <a href="javascrit:(0)"><span>아이디찾기 /</span></a>
-                <a href="javascrit:(0)"><span>비밀번호찾기 </span></a>
+            <div class="button-login-box" >
+                <button type="button" class="btn btn-primary btn-xs" style="width:100%">회원가입</button>
             </div>
             <div class="button-login-box" >
-                <button type="button" class="btn btn-primary btn-xs" style="width:100%">로그인</button>
+                <button type="button" class="btn btn-secondary btn-xs" style="width:100%">취소</button>
             </div>
         </div>
 
