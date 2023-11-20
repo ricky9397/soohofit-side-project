@@ -18,11 +18,13 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 public class SecurityConfig {
 
 
+    private final CorsConfig corsConfig;
+
+
     @Bean
     public WebSecurityCustomizer configure(){
         return (web) -> web.ignoring()
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/static/**"))
-                .requestMatchers(AntPathRequestMatcher.antMatcher("/user/login/loginForm"));
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/static/**"));
     }
 
     @Bean
@@ -31,6 +33,7 @@ public class SecurityConfig {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> corsConfig.corsFilter())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
