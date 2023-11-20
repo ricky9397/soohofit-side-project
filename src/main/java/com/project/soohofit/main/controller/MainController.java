@@ -1,5 +1,6 @@
 package com.project.soohofit.main.controller;
 
+import com.project.soohofit.common.config.redis.RedisUtil;
 import com.project.soohofit.common.response.CommonResponse;
 import com.project.soohofit.common.response.DataResponse;
 import com.project.soohofit.common.response.ResponseStatus;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +24,8 @@ import java.util.Map;
 public class MainController {
 
     private Logger logger = LogManager.getLogger(MainController.class);
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Autowired
     RedisTemplate<String, String> redisTemplate;
@@ -43,14 +47,13 @@ public class MainController {
     @ResponseBody
     public CommonResponse ajax() {
         Map<String, Object> data = new HashMap<>();
-        data.put("result", url);
 
-        ValueOperations<String, String> stringValueOperations = redisTemplate.opsForValue();
+        redisUtil.setValues("set", "value", Duration.ofSeconds(60));
+        String val = redisUtil.getValues("set");
+        log.info("###### redis value :: " + val);
+        redisUtil.deleteValues("set");
 
-        stringValueOperations.set("hello", "world");
-
-        String redisValue = stringValueOperations.get("hello");
-        return DataResponse.of(ResponseStatus.SUCCESS, data);
+        return DataResponse.of(ResponseStatus.SUCCESS, "result", val);
     }
 
 }

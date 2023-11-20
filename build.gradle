@@ -38,29 +38,28 @@ dependencies {
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
     /* JPA */
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    /* Redis */
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-
     // vault
     implementation 'org.springframework.cloud:spring-cloud-config-server'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
-
     // logstash
     implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '7.4'
-
     // log4h2
     implementation group: 'org.codehaus.janino', name: 'janino', version: '3.1.10'
-
     /* Spring Security */
     implementation 'org.springframework.boot:spring-boot-starter-security'
     /* oauth2 */
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-
-
     // spring data redis
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.session:spring-session-data-redis'
+    /* jwt */
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+    implementation 'com.auth0:java-jwt:3.16.0'
+
+
 
 
 }
