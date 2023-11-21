@@ -7,4 +7,7 @@ import java.util.Optional;
 
 public interface UserSecurityRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserId(String username);
+
+
+
 }
