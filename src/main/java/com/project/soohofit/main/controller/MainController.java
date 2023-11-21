@@ -1,6 +1,5 @@
 package com.project.soohofit.main.controller;
 
-import com.project.soohofit.common.config.redis.RedisUtil;
 import com.project.soohofit.common.minio.FileUtil;
 import com.project.soohofit.common.redis.RedisUtil;
 import com.project.soohofit.common.response.CommonResponse;
@@ -28,6 +27,7 @@ import java.util.Map;
 public class MainController {
 
     private Logger logger = LogManager.getLogger(MainController.class);
+
     @Autowired
     private RedisUtil redisUtil;
 
