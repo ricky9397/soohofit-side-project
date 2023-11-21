@@ -1,6 +1,7 @@
 package com.project.soohofit.main.controller;
 
 import com.project.soohofit.common.config.redis.RedisUtil;
+import com.project.soohofit.common.minio.FileUtil;
 import com.project.soohofit.common.response.CommonResponse;
 import com.project.soohofit.common.response.DataResponse;
 import com.project.soohofit.common.response.ResponseStatus;
@@ -13,7 +14,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -30,6 +34,9 @@ public class MainController {
     @Autowired
     RedisTemplate<String, String> redisTemplate;
 
+    @Autowired
+    FileUtil fileUtil;
+
     @Value("${postgre.url}")
     private String url;
 
@@ -43,15 +50,17 @@ public class MainController {
         return "main/main";
     }
 
-    @GetMapping("/ajax")
+    @RequestMapping("/ajax")
     @ResponseBody
-    public CommonResponse ajax() {
+    public CommonResponse ajax(@RequestParam("file") MultipartFile file) {
         Map<String, Object> data = new HashMap<>();
 
         redisUtil.setValues("set", "value", Duration.ofSeconds(60));
         String val = redisUtil.getValues("set");
         log.info("###### redis value :: " + val);
         redisUtil.deleteValues("set");
+
+        fileUtil.save(file);
 
         return DataResponse.of(ResponseStatus.SUCCESS, "result", val);
     }
