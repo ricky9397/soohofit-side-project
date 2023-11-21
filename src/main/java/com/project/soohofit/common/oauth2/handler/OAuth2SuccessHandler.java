@@ -1,10 +1,15 @@
 package com.project.soohofit.common.oauth2.handler;
 
+import com.project.soohofit.common.config.security.repository.UserSecurityRepository;
+import com.project.soohofit.user.domain.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +21,16 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof OAuth2User) {
+            if(principal instanceof OidcUser){ // google
 
+            } else { // kakao, naver 등
+                String kakaoId = String.valueOf(((OAuth2User) principal).getAttributes().get("id"));
+
+
+
+            }
+        }
     }
 }

@@ -15,6 +15,8 @@ public class JwtTokenProvider {
     private static String secretKey;
 
     private static final Algorithm ALGORITHM = Algorithm.HMAC256(secretKey);
+
+
     private static final long AUTH_TIME = 60 * 10;
     private static final long REFRESH_TIME = 60*60*24*7; // 7일
 
@@ -58,5 +60,6 @@ public class JwtTokenProvider {
                     .username(decode.getSubject()).build();
         }
     }
+
 
 }

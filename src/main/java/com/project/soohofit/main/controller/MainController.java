@@ -1,6 +1,6 @@
 package com.project.soohofit.main.controller;
 
-import com.project.soohofit.common.config.redis.RedisUtil;
+import com.project.soohofit.common.redis.RedisUtil;
 import com.project.soohofit.common.response.CommonResponse;
 import com.project.soohofit.common.response.DataResponse;
 import com.project.soohofit.common.response.ResponseStatus;
@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
