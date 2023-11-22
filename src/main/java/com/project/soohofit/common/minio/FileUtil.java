@@ -1,15 +1,12 @@
 package com.project.soohofit.common.minio;
 
 import com.project.soohofit.common.minio.entity.FileEntity;
-import com.project.soohofit.main.controller.MainController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.util.UUID;
 
 @Log4j2
@@ -17,15 +14,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FileUtil implements FileUploadService {
 
-    private Logger logger = LogManager.getLogger(this);
-
     private final MinioStorageService minioStorageService;
 
     @Override
-    /**
-     *  todo : db 저장 로직 추가
-     */
-    public UUID save(MultipartFile file) {
+    public UUID fileSave(MultipartFile file) {
         try {
             UUID fileId = UUID.randomUUID();
             FileEntity fileEntity = FileEntity.builder()
@@ -35,11 +27,39 @@ public class FileUtil implements FileUploadService {
                     .build();
                     // db 저장 로직
 
-            minioStorageService.save(file, fileId); // minio save
+            minioStorageService.fileSave(file, fileId); // minio save
             return fileId;
         } catch (Exception e) {
-            logger.info("Exception occurred when trying to save the file", e);
+            log.info("exception occurred when trying to save the file", e);
             throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public InputStream downloadFile(String objectName) {
+        try {
+            boolean existFile = minioStorageService.isObjectExist(objectName);
+
+            if (!existFile) {
+                throw new FileNotFoundException("file does not exist: " + objectName);
+            }
+
+            int bytesRead;
+            byte[] buffer = new byte[1024];
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            InputStream inputStream = minioStorageService.downloadFile(objectName);
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            return new ByteArrayInputStream(outputStream.toByteArray());
+        } catch (FileNotFoundException e) {
+            log.info(e.getMessage());
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            log.error("an error occurred while downloading the file", e);
+            throw new RuntimeException(e);
         }
     }
 }
