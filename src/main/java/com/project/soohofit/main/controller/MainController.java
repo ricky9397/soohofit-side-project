@@ -52,15 +52,13 @@ public class MainController {
 
     @RequestMapping("/ajax")
     @ResponseBody
-    public CommonResponse ajax(@RequestParam("file") MultipartFile file) {
+    public CommonResponse ajax(/*@RequestParam("file") MultipartFile file*/) {
         Map<String, Object> data = new HashMap<>();
 
         redisUtil.setValues("set", "value", Duration.ofSeconds(60));
         String val = redisUtil.getValues("set");
-        log.info("###### redis value :: " + val);
+        log.info("###### redis value :: ");
         redisUtil.deleteValues("set");
-
-        fileUtil.save(file);
 
         return DataResponse.of(ResponseStatus.SUCCESS, "result", val);
     }
