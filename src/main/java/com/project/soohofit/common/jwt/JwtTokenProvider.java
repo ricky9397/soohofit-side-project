@@ -1,65 +1,93 @@
 package com.project.soohofit.common.jwt;
 
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
+import com.project.soohofit.user.domain.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Header;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Service;
 
-import java.time.Instant;
+import java.time.Duration;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Set;
 
+@RequiredArgsConstructor
+@Service
 public class JwtTokenProvider {
 
-    @Value("${jwt.secret_key}")
-    private static String secretKey;
-
-    private static final Algorithm ALGORITHM = Algorithm.HMAC256(secretKey);
+    @Value("${spring.jwt.secret}")
+    private String secretKey;
 
 
-    private static final long AUTH_TIME = 60 * 10;
-    private static final long REFRESH_TIME = 60*60*24*7; // 7일
-
-
-    /**
-     * AuthToken 토큰발행
-     * @param userName
-     * @return
-     */
-    public static String makeAuthToken(String userName) {
-        // Hashish 암호방식
-        return JWT.create()
-                .withSubject(userName)
-                .withExpiresAt(new Date(System.currentTimeMillis() + AUTH_TIME))
-                .withClaim("exp", Instant.now().getEpochSecond() + AUTH_TIME)
-                .sign(ALGORITHM);
+    public String generateToken(User user, Long expiredTm) {
+        Date now = new Date();
+        return makeToken(new Date(System.currentTimeMillis() + expiredTm), user);
     }
 
-    /**
-     * RefreshToken 토큰발행
-     *
-     * @param userName
-     * @return
-     */
-    public static String makeRefreshToken(String userName){
-        return JWT.create()
-                .withSubject(userName)
-                .withExpiresAt(new Date(System.currentTimeMillis() + REFRESH_TIME))
-                .withClaim("exp", Instant.now().getEpochSecond() + REFRESH_TIME)
-                .sign(ALGORITHM);
+    private String makeToken(Date expiry, User user) {
+        Claims claims = Jwts.claims();
+        claims.put("userName", user.getUserId());
+
+        return Jwts.builder()
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(expiry)
+                .setSubject(user.getUserId())
+                .setClaims(claims)
+                .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)), SignatureAlgorithm.HS256)
+                .compact();
     }
 
-    public static JwtValidToken jwtValidToken(String token){
+    public boolean validToken(String token) {
         try {
-            DecodedJWT verify = JWT.require(ALGORITHM).build().verify(token);
-            return JwtValidToken.builder().success(true)
-                    .username(verify.getSubject()).build();
-        }catch(Exception ex){
-            DecodedJWT decode = JWT.decode(token);
-            return JwtValidToken.builder().success(false)
-                    .username(decode.getSubject()).build();
+            Jwts.parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
+    public boolean isExpired(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration()
+                .before(new Date());
+    }
+
+
+//    public Authentication getAuthentication(String token) {
+//        Claims claims = getClaims(token);
+//        Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+//        return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(claims.getSubject
+//                (), "", authorities), token, authorities);
+//    }
+
+    public String getUserId(String token) {
+        Claims claims = getClaims(token);
+        return claims.get("userName", String.class);
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
 
 }

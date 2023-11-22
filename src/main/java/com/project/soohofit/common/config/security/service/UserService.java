@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UserSecurityService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     private final UserSecurityRepository userSecurityRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -24,4 +24,5 @@ public class UserSecurityService implements UserDetailsService {
         User userEntity = userSecurityRepository.findByUserId(username).orElseThrow(() -> new IllegalArgumentException(username + " 사용자가 존재하지 않습니다"));
         return new UserDetail(userEntity);
     }
+
 }
