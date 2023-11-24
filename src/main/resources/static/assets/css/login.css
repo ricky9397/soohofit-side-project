@@ -14,7 +14,7 @@ html, body {
 }
 
 #loginBox {
-    width: 350px;
+    width: 400px;
     text-align: center;
     background-color: #ffffff;
 }
@@ -48,5 +48,5 @@ html, body {
 }
 
 #inputBox button {
-    padding: 3px 5px;
+    padding: 10px 5px;
 }

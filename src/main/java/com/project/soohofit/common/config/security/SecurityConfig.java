@@ -1,7 +1,6 @@
 package com.project.soohofit.common.config.security;
 
 
-import com.project.soohofit.common.config.CorsConfig;
 import com.project.soohofit.common.filter.TokenAuthenticationFilter;
 import com.project.soohofit.common.jwt.JwtTokenProvider;
 import com.project.soohofit.common.oauth2.handler.OAuth2SuccessHandler;
@@ -25,7 +24,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final CorsConfig corsConfig;
+//    private final CorsConfig corsConfig;
     private final PrincipalOauth2UserService principalOauth2UserService;
     private final OidcUserService principalOidcUserService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
@@ -57,7 +56,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(mvcMatcherBuilder.pattern("/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/user")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/user/login/loginForms")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/user/login/loginForm")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/user/join/**")).permitAll()
                         .anyRequest().authenticated()
                 )
