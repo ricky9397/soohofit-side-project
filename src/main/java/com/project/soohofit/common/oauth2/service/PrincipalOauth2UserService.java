@@ -30,6 +30,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                 break;
         }
 
+
+
         return oAuth2User;
     }
 }

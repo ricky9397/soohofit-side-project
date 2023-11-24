@@ -13,7 +13,7 @@ import java.util.Map;
 @Getter
 public class UserDetail implements UserDetails, OAuth2User {
 
-    private User user;
+    private final User user;
     private Map<String, Object> attributes;
 
     public UserDetail(User user) {

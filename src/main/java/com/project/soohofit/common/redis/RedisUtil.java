@@ -1,4 +1,4 @@
-package com.project.soohofit.common.config.redis;
+package com.project.soohofit.common.redis;
 
 
 import org.springframework.data.redis.core.RedisTemplate;

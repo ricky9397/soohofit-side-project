@@ -17,6 +17,9 @@ server:
 
 spring:
 
+  jwt:
+    secret: soohofitsoohofitsoohofitsoohofitsoohofitsoohofitsoohofitsoohofitsoohofitsoohofit
+
   session:
     redis:
       repository-type: default
@@ -77,8 +80,6 @@ spring:
 #          google:
 #          client-id: 596950358351-5016avddl8fq2n4toiqirm1a2akk1pth.apps.googleusercontent.com
 #          client-secret: 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
-  jwt:
-    secret_key: soohofit123
 
 
 logging:
@@ -86,5 +87,7 @@ logging:
     org.hibernate:
       type.descriptor: trace
       sql: debug
+
+
 
 
