@@ -62,24 +62,34 @@ spring:
     oauth2:
       client:
         registration:
+          google:
+            client-id: 835705296716-n61ernocamco5o95f8plgdf7hp6oodua.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+
           kakao:
-            client-id: 0ff01f0a268ff9f9adefd55604b125d7
-            client-secret: bGMpDbPwFSfSozVo6LCIhuj6d29p40xv
-            client-name: Kakao
-            scope: profile_nickname, account_email, gender, birthday
+#            client-id: 0ff01f0a268ff9f9adefd55604b125d7
+            client-id: 56e60b9d77214ee307580394e29287b7
+#            client-secret: bGMpDbPwFSfSozVo6LCIhuj6d29p40xv
+            client-secret: B6yNzMq5JkDMAEtmPvVedTJAAhfDWlrp
+            scope:
+              - profile_nickname
+              - account_email
+#              - gender
+#              - birthday
             authorization-grant-type: authorization_code
-            redirect-uri: http://127.0.0.1:8080/login/oauth2/code/kakao
-            client-authentication-method: POST
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+#            client-authentication-method: POST
+            client-authentication-method: client_secret_post
+            client-name: Kakao
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
             token-uri: https://kauth.kakao.com/oauth/token
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
-
-#          google:
-#          client-id: 596950358351-5016avddl8fq2n4toiqirm1a2akk1pth.apps.googleusercontent.com
-#          client-secret: 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
 
 
 logging:

@@ -58,9 +58,10 @@ dependencies {
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
     implementation 'com.auth0:java-jwt:3.16.0'
-
     /* minio */
     implementation group: 'io.minio', name: 'minio', version: '8.5.7'
+    /* Json 파싱 */
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
 
 

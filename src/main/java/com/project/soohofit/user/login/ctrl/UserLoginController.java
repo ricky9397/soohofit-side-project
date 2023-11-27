@@ -8,7 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 //@Controller
 @Controller
@@ -17,8 +21,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserLoginController {
 
     @GetMapping("/login/loginForm")
-    public String loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String loginForm() throws Exception {
         return "user/login/loginForm";
+    }
+
+    public String generateState(){
+        SecureRandom random = new SecureRandom();
+        return new BigInteger(130, random).toString(32);
     }
 
     private final JwtTokenProvider jwtTokenProvider;
