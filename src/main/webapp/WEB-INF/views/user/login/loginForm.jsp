@@ -10,33 +10,35 @@
         <div id="loginBoxTitle">SOOHOFIT Login</div>
         <!-- 아이디, 비번, 버튼 박스 -->
         <div id="inputBox">
-            <div class="input-form-box"><span>아이디 </span><input type="text" id="userId" name="userId" class="form-control"></div>
-            <div class="input-form-box"><span>비밀번호 </span><input type="password" id="userPwd" name="userPwd" class="form-control"></div>
-            <div>
+            <form name="frm" id="frm" action="" method="post" target="_self">
+                <div class="input-form-box"><span>아이디 </span><input type="text" id="userId" name="userId" class="form-control"></div>
+                <div class="input-form-box"><span>비밀번호 </span><input type="password" id="userPwd" name="userPwd" class="form-control"></div>
+                <div>
 
-                <a href="<c:url value="/user/join/joinForm"/>"><span>회원가입 /</span></a>
-                <a href="javascrit:(0)"><span>아이디찾기 /</span></a>
-                <a href="javascrit:(0)"><span>비밀번호찾기 </span></a>
-            </div>
-            <div class="button-login-box" >
-                <button type="button" class="btn btn-primary btn-xs" style="width:100%">로그인</button>
-            </div>
-            <div class="button-login-box" >
-                <button type="button" class="btn"  style="width:100%" onclick="loginKakao();">
-                    <img src="/assets/images/icons/kakao_login_medium_wide.png" alt="" style="width:100%">
-                </button>
-            </div>
-            <div class="button-login-box" >
-                <button type="button" class="btn" style="width:100%" onclick="loginGoogle();">
-                    <img src="/assets/images/icons/web_neutral_sq_SI@3x.png" alt="" style="width:100%">
-                </button>
+                    <a href="<c:url value="/user/join/joinForm"/>"><span>회원가입 /</span></a>
+                    <a href="javascrit:(0)"><span>아이디찾기 /</span></a>
+                    <a href="javascrit:(0)"><span>비밀번호찾기 </span></a>
+                </div>
+                <div class="button-login-box" >
+                    <button type="button" class="btn btn-primary btn-xs" style="width:100%" onclick="goLogin();">로그인</button>
+                </div>
+                <div class="button-login-box" >
+                    <button type="button" class="btn"  style="width:100%" onclick="loginKakao();">
+                        <img src="/assets/images/icons/kakao_login_medium_wide.png" alt="" style="width:100%">
+                    </button>
+                </div>
+                <div class="button-login-box" >
+                    <button type="button" class="btn" style="width:100%" onclick="loginGoogle();">
+                        <img src="/assets/images/icons/web_neutral_sq_SI@3x.png" alt="" style="width:100%">
+                    </button>
 
-            </div>
-            <div class="button-login-box" >
-                <button type="button" class="btn" style="width:100%" onclick="loginNaver();">
-                    <img src="/assets/images/icons/btnG_완성형.png" alt="" style="width:100%">
-                </button>
-            </div>
+                </div>
+                <div class="button-login-box" >
+                    <button type="button" class="btn" style="width:100%" onclick="loginNaver();">
+                        <img src="/assets/images/icons/btnG_완성형.png" alt="" style="width:100%">
+                    </button>
+                </div>
+            </form>
         </div>
 
     </div>
@@ -61,6 +63,12 @@
     function loginNaver() {
         window.open('/oauth2/authorization/naver', 'snsLogin', 'status=0,toolbar=0,Titlebar=0,width=500,height=800,resizable=1');
     }
+
+    function goLogin() {
+      $('#frm').attr('action', '<c:url value="/user/login/login"/>');
+      $('#frm').submit();
+    }
+
 
 </script>
 
