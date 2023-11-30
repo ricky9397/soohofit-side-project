@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 //@Controller
 @Controller
@@ -16,11 +17,5 @@ public class UserLoginController {
     public String loginForm() throws Exception {
         return "user/login/loginForm";
     }
-
-//    @PostMapping("/login/login")
-//    public String login() throws Exception {
-//        return "user/login/loginForm";
-//    }
-
 
 }
