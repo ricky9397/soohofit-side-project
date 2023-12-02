@@ -1,6 +1,9 @@
 package com.project.soohofit.common;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.util.List;
 import java.util.Map;
@@ -62,7 +65,19 @@ public class BaseUtils {
         return false;
     }
 
-
+    /**
+     * Json 파싱 object
+     *
+     * @param object
+     * @return
+     * @throws Exception
+     */
+    public static JSONObject getJsonObject(Object object) throws Exception {
+        JSONParser jsonParser = new JSONParser();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonStr = objectMapper.writeValueAsString(object);
+        return (JSONObject) jsonParser.parse(jsonStr);
+    }
 
 
 
