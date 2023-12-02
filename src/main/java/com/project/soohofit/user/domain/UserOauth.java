@@ -1,5 +1,6 @@
 package com.project.soohofit.user.domain;
 
+import com.project.soohofit.common.jpa.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "TB_USER_OAUTH")
-public class UserOauth {
+public class UserOauth extends BaseTimeEntity {
 
     @Id
     @Column(name = "USER_ID", length = 50)
