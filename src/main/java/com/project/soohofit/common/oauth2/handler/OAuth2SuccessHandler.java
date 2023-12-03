@@ -25,16 +25,12 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         Object principal = authentication.getPrincipal();
         if (principal instanceof OAuth2User) {
-            if(principal instanceof OidcUser){ // google
+            String id = String.valueOf(((OAuth2User) principal).getAttributes().get("id"));
 
-            } else { // kakao, naver 등
-                String kakaoId = String.valueOf(((OAuth2User) principal).getAttributes().get("id"));
+            User user = userSecurityRepository.findByUserId(id).orElseThrow(() -> new AuthenticationCredentialsNotFoundException("회원 인증을 실패하였습니다."));
 
-                User user = userSecurityRepository.findByUserId(kakaoId).orElseThrow(() -> new AuthenticationCredentialsNotFoundException("회원 인증을 실패하였습니다."));
+            // TODO SNS 로그인 성공 후 토큰 발급 후 전달 로직 만들 어야함.
 
-                // TODO SNS 로그인 성공 후 토큰 발급 후 전달 로직 만들 어야함.
-
-            }
         }
     }
 }

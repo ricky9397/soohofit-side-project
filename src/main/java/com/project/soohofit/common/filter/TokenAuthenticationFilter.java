@@ -28,6 +28,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @SneakyThrows
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // 일반 로그인 요청이면 다음 필터인 CustomAuthenticationFilter 호출
+        if (request.getRequestURI().equals("/user/login/login")) { 
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authorizationHeader = request.getHeader(Consts.HEADER_AUTHORIZATION);
 
         if (authorizationHeader == null || !authorizationHeader.startsWith(Consts.TOKEN_PREFIX)) {
@@ -39,7 +45,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String token = authorizationHeader.substring(Consts.TOKEN_PREFIX.length());
         log.info("#############토큰 정보############ : {}", token);
         String userName = jwtTokenProvider.getUserId(token);
-
 
         if (jwtTokenProvider.validToken(token)) {
 //            Authentication authentication = jwtTokenProvider.getAuthentication(token);

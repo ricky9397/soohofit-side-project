@@ -68,5 +68,9 @@ public class User extends BaseTimeEntity {
     @Column(name = "ROLE", length = 20)
     private String role;
 
+    @ColumnDefault(value = "'N'")
+    @Column(name = "LOCKED_YN", length = 1)
+    private String lockedYn;
+
 
 }

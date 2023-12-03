@@ -59,8 +59,7 @@ public class UserDetail implements UserDetails, OAuth2User {
 
     @Override
     public boolean isAccountNonLocked() {
-        //TODO 유저로그인 도메인 생성 후 작업
-        return false;
+        return user.getLockedYn().equals("N") ? true : false;
     }
 
     @Override

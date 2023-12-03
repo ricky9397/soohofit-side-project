@@ -59,7 +59,7 @@
     </logger>
 
     <logger name="org.springframework.web.servlet.DispatcherServlet" additivity="false">
-        <level value = "debug" />
+        <level value = "info" />
 <!--        <appender-ref ref="logstash"/>-->
         <appender-ref ref="console" />
         <appender-ref ref="DAILY_ROLLING_FILE_APPENDER" />
