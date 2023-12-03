@@ -19,9 +19,8 @@ public class CorsConfig {
         configuration.addAllowedMethod("*");
         configuration.addAllowedOrigin("*");
         configuration.setAllowCredentials(true);
-        // TODO jsp 스크립트 헤더에 토큰 ajax 로직 생성 후 해제
-//        configuration.addExposedHeader("auth_token"); // 로그인시 Authorization 헤더에 전달하기 위한 cors
-//        configuration.addExposedHeader("refresh_token");
+        configuration.addExposedHeader("access_token");
+        configuration.addExposedHeader("refresh_token");
         source.registerCorsConfiguration("/**", configuration);
         return new CorsFilter(source);
     }

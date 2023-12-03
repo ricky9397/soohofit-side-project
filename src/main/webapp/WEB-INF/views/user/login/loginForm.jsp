@@ -76,13 +76,15 @@
         <%--$('#frm').submit();--%>
 
         const data = {
-            "userId" : $('#userId').val(),
-            "userPwd" : $('#userPwd').val(),
+            "userId": $('#userId').val(),
+            "userPwd": $('#userPwd').val(),
         }
 
-        cmmnAjax('<c:url value="/user/login/login"/>', data, function (res) {
-            console.log(res);
-        });
+        cmmnAjax('<c:url value="/user/login/login"/>',
+            JSON.stringify(data),
+            function (res) {
+                console.log(res);
+            });
     }
 
 </script>

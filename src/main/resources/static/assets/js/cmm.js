@@ -27,7 +27,8 @@ var doubleSubmitFlag = false;
 function cmmnAjax(url, data, callback, isDubleSubmitCheck, isFile) {
 	var dataType = "json";
 	var processData = true;
-	var contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+	// var contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+	var contentType = 'application/json';
 
 	//중복 submit 체크
 	if(isDubleSubmitCheck === true) {

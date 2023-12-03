@@ -1,7 +1,6 @@
 package com.project.soohofit.common.jwt;
 
 
-import com.project.soohofit.user.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
@@ -22,20 +21,20 @@ public class JwtTokenProvider {
     private String secretKey;
 
 
-    public String generateToken(User user, Long expiredTm) {
+    public String generateToken(String userId, Long expiredTm) {
         Date now = new Date();
-        return makeToken(new Date(System.currentTimeMillis() + expiredTm), user);
+        return makeToken(new Date(System.currentTimeMillis() + expiredTm), userId);
     }
 
-    private String makeToken(Date expiry, User user) {
+    private String makeToken(Date expiry, String userId) {
         Claims claims = Jwts.claims();
-        claims.put("userName", user.getUserId());
+        claims.put("userName", userId);
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(expiry)
-                .setSubject(user.getUserId())
+                .setSubject(userId)
                 .setClaims(claims)
                 .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)), SignatureAlgorithm.HS256)
                 .compact();
